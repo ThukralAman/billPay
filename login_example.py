@@ -85,8 +85,13 @@ def viewBills():
     if 'username' in session:
         bills = bill_details.find({'user' : session['username']})
         print bills
+        return render_template('viewBills.html', session = session, bills = bills)
 
-    return render_template('viewBills.html', session = session, bills = bills)
+    return render_template('index.html')
+
+
+
+    
 
 @app.route('/calculate', methods=['POST', 'GET'])
 def calculate():
