@@ -1,0 +1,36 @@
+/*header {
+	height: 120px;
+}*/
+
+/*header h1 {
+	float: left;
+	margin-top: 32px;
+}*/
+
+.color {
+	color: #02b8dd;
+}
+
+/*header nav {
+	float: right;
+}
+
+header nav ul li {
+	float: left;
+	display: inline-block;
+	margin-top: 50px;
+}*/
+
+.navbar-nav li a {
+	color: #444;
+	/*text-transform: uppercase;*/
+	font-weight: normal;
+	display: block;
+	margin-right: 20px;
+}
+
+.navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+

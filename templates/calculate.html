@@ -1,0 +1,162 @@
+{% extends "layout.html" %}
+{% block body %}
+<script>
+var bill = JSON.stringify({{bill_info  | safe}});
+console.log(bill);
+$(function() {
+    $('#saveBill').click(function() {
+        var user = 'Aman';
+        var pass = 'Thukral';
+        var abc = ['a', 'b', 'c'];
+        $.ajax({
+            url: '/saveBill',
+            data: JSON.stringify({'bill': bill }),
+            //data: JSON.stringify({'bill': bill}),
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            success: function(response) {
+                alert(response);
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+
+</script>
+
+<div class="jumbotron text-center">
+  <br>
+  <br>
+  <h4>   Hello {{session['username'] }} !!  </h4>
+  <h5> Welcome </h5>
+</div>
+
+<div class="container">
+  <h3>Bill Details</h3>
+  <h4>    {{bill_info | safe}} !!  </h4>
+  <p>Please make sure the bill details you entered are correct. </p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Amount/Units</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Electricity Units(excluding power backup)</td>
+        <td>{{bill_info['electricity_units'] }} Units</td>
+      </tr>
+      <tr>
+        <td>Power Backup Units</td>
+        <td>{{bill_info['power_backup'] }} Units</td>
+      </tr>
+      <tr>
+        <td>Late Charges (in Rupees)</td>
+        <td>Rs.{{bill_info['late_charges'] }}</td>
+      </tr>
+      <tr>
+        <td>Servic tax (in Rupees)</td>
+        <td>Rs.{{bill_info['service_tax'] }}</td>
+      </tr>
+      <tr>
+        <td>Swach Bharat Charges</td>
+        <td>Rs.{{bill_info['swach_bharat'] }}</td>
+      </tr>
+      <tr>
+        <td>Total Amount Payable (in Rupees)</td>
+        <td>Rs.{{bill_info['amount_to_be_paid'] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br/>
+
+<div class="container">
+  <h3>Individual Share</h3>
+  <p>So here is your share for the month </p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Your Share in Bill</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Aman</td>
+        <td>Rs.{{bill_info['aman_share'] |round(2, 'floor')}}</td>
+      </tr>
+      <tr>
+        <td>Gaurav</td>
+        <td>Rs.{{bill_info['gaurav_share'] |round(2, 'floor') }}</td>
+      </tr>
+      <tr>
+        <td>Karan</td>
+        <td>Rs.{{bill_info['karan_share'] |round(2, 'floor') }}</td>
+      </tr>
+      <tr>
+        <td>Chandan</td>
+        <td>Rs.{{bill_info['chandan_share'] |round(2, 'floor') }}</td>
+      </tr>
+      <tr>
+        <td>Anshul</td>
+        <td>Rs.{{bill_info['anshul_share'] |round(2, 'floor') }}</td>
+      </tr>
+      <tr>
+        <td>Rajendar Reddy</td>
+        <td>Rs.{{bill_info['rajan_share'] |round(2, 'floor') }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br/>
+<br/>
+
+<div class="container">
+  <h3>Other Details</h3>
+  <p>Additional details </p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Artifacr</th>
+        <th>Units/Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BR1 consumption</td>
+        <td>{{bill_info['br1'] |round(2, 'floor')}} Units</td>
+      </tr>
+      <tr>
+        <td>BR2 consumption</td>
+        <td>{{bill_info['br2'] |round(2, 'floor') }} Units</td>
+      </tr>
+      <tr>
+        <td>BR3 consumption</td>
+        <td>{{bill_info['br3'] |round(2, 'floor') }} Units</td>
+      </tr>
+      <tr>
+        <td>Common Area Consumption</td>
+        <td>{{bill_info['common_room_reading'] |round(2, 'floor') }} Units</td>
+      </tr>
+      <tr>
+        <td>Total Consumption</td>
+        <td>{{bill_info['electricity_units'] |round(2, 'floor') }} Units</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container text-center">
+<button type="button" id="saveBill" class="btn btn-info">Save Bill Info </button>
+<br>
+<br>
+</div>
+
+{% endblock %}

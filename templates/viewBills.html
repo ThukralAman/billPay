@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<div class="jumbotron text-center">
+  <br>
+  <br>
+  <h4>   Hello {{session['username'] }} !!  </h4>
+  <h5> Welcome </h5>
+</div>
+
+{% for bill in bills %}
+ 
+  <div class="container">
+    <hr>
+    <h4> {{loop.index}} </h4>
+    <h5> Month Number: {{bill['month_number']}}  
+    <hr>
+    <h3>Bill Details</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Amount/Units</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="danger">
+          <td>Electricity Units(excluding power backup)</td>
+          <td>{{bill['electricity_units'] }} Units</td>
+        </tr>
+        <tr class="danger">
+          <td>Power Backup Units</td>
+          <td>{{bill['power_backup'] }} Units</td>
+        </tr>
+        <tr class="danger">
+          <td>Late Charges (in Rupees)</td>
+          <td>Rs.{{bill['late_charges'] }}</td>
+        </tr>
+        <tr class="danger">
+          <td>Servic tax (in Rupees)</td>
+          <td>Rs.{{bill['service_tax'] }}</td>
+        </tr>
+        <tr class="danger">
+          <td>Swach Bharat Charges</td>
+          <td>Rs.{{bill['swach_bharat'] }}</td>
+        </tr>
+        <tr class="success">
+          <td>Total Amount Payable (in Rupees)</td>
+          <td>Rs.{{bill['amount_to_be_paid'] }}</td>
+        </tr>
+        <tr class="info">
+          <td>------</td>
+          <td>------</td>
+        </tr>
+        <tr class="danger">
+          <td>Aman</td>
+          <td>Rs.{{bill['aman_share'] |round(2, 'floor')}}</td>
+        </tr>
+        <tr class="danger">
+          <td>Gaurav</td>
+          <td>Rs.{{bill['gaurav_share'] |round(2, 'floor') }}</td>
+        </tr>
+        <tr class="danger">
+          <td>Karan</td>
+          <td>Rs.{{bill['karan_share'] |round(2, 'floor') }}</td>
+        </tr>
+        <tr class="danger">
+          <td>Chandan</td>
+          <td>Rs.{{bill['chandan_share'] |round(2, 'floor') }}</td>
+        </tr>
+        <tr class="danger">
+          <td>Anshul</td>
+          <td>Rs.{{bill['anshul_share'] |round(2, 'floor') }}</td>
+        </tr>
+        <tr class="danger">
+          <td>Rajendar Reddy</td>
+          <td>Rs.{{bill['rajan_share'] |round(2, 'floor') }}</td>
+        </tr>
+        <tr class="info">
+          <td>------</td>
+          <td>------</td>
+        </tr>
+        <tr class="danger">
+          <td>BR1 consumption</td>
+          <td>{{bill['br1'] |round(2, 'floor')}} Units</td>
+        </tr>
+        <tr class="danger">
+          <td>BR2 consumption</td>
+          <td>{{bill['br2'] |round(2, 'floor') }} Units</td>
+        </tr>
+        <tr class="danger">
+          <td>BR3 consumption</td>
+          <td>{{bill['br3'] |round(2, 'floor') }} Units</td>
+        </tr>
+        <tr class="danger">
+          <td>Common Area Consumption</td>
+          <td>{{bill['common_room_reading'] |round(2, 'floor') }} Units</td>
+        </tr>
+        <tr class="success">
+          <td>Total Consumption</td>
+          <td>{{bill['electricity_units'] |round(2, 'floor') }} Units</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br/>
+
+  
+<hr>
+
+ {% endfor %}
+
+
+{% endblock %}

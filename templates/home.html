@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="jumbotron text-center">
+  <br>
+  <br>
+  <h5>   Hello {{session['username'] }} !!  </h5>
+  <h6> Welcome </h6>
+</div>
+
+
+<div class="container">
+  <h2>Bill Details</h2>
+  <form class="form-horizontal" method=POST action="{{ url_for('calculate') }}">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Electricity Charges(units):</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="electricityCharges" name="electricityCharges" placeholder="Electricity Charges(units)">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Power Backup Charges(units):</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="powerBackupCharges" name="powerBackupCharges" placeholder="Power Backup Charges(units)">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Late Charges(in Rupees):</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="lateCharges" name="lateCharges" placeholder="Late Charges(in Rupees)">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Service Tax(in Rupees):</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="serviceTax" name="serviceTax" placeholder="Service Tax(in Rupees)">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Swach Bharat charge(in Rupees):</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="swachBharatCharges" name="swachBharatCharges" placeholder="Swach Bharat charge(in Rupees)">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Month number:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="monthNumber" name="monthNumber" placeholder="Month number(Enter 8 if month is August)">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Start Date of meter reading:</label>
+      <div class="col-sm-10">
+        <input type="date" class="form-control" id="startDate" name="startDate" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">End Date of meter reading:</label>
+      <div class="col-sm-10">
+        <input type="date" class="form-control" id="endDate" name="endDate" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">BR1 Start Reading:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="br1StartReading" name="br1StartReading" placeholder="BR1 meter reading on start date">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">BR1 End reading:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="br1EndReading" name="br1EndReading" placeholder="BR1 meter reading on end date">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">BR2 Start Reading:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="br2StartReading" name="br2StartReading" placeholder="BR2 meter reading on start date">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">BR2 End reading:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="br2EndReading" name="br2EndReading" placeholder="BR2 meter reading on end date">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">BR3 Start Reading:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="br3StartReading" name="br3StartReading" placeholder="BR3 meter reading on start date">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">BR3 End reading:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="br3EndReading" name="br3EndReading" placeholder="BR3 meter reading on end date">
+      </div>
+    </div>
+        
+    <!-- <div class="form-group">
+        <label class="control-label col-sm-2" for="pwd">Start Date:</label>
+        <div class='input-group date col-sm-10' id='datetimepicker6'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+
+    
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="pwd">End Date:</label>
+        <div class='input-group date col-sm-10' id='datetimepicker7'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+        
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker6').datetimepicker();
+            $('#datetimepicker7').datetimepicker({
+                useCurrent: false //Important! See issue #1075
+            });
+            $("#datetimepicker6").on("dp.change", function (e) {
+                $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+            });
+            $("#datetimepicker7").on("dp.change", function (e) {
+                $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+            });
+        });
+    </script> -->
+
+
+
+
+
+
+
+    
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

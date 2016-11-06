@@ -1,0 +1,13 @@
+.jumbotron{
+	/*background-image: url("{{ url_for('static', filename='img/movies.jpg') }}");*/
+	background-image: url('../img/movies.jpg');
+	color:grey;
+	background-attachment: fixed;
+	background-size: 580px;
+	min-height: 580px;
+	margin-top: 0px;
+	margin-bottom: 8px;
+	top:0;
+  left:0;
+
+}
